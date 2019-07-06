@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <name>Selenium Maven Task</name>
-    <description>Framework Designed withw Selenium-Maven</description>
+    <description>Framework designed with Selenium-Maven</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

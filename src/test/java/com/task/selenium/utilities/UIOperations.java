@@ -19,36 +19,44 @@ public class UIOperations {
 	}
 	
 			
-	public void perform(Properties p,String operation,String objectName,String objectType,String value) throws Exception{
+	public void perform(Properties p,String operation,String objectName,String objectType,String value,WebDriverWait driverwait) throws Exception{
 		System.out.println("");
 		switch (operation.toUpperCase()) {
 		case "CLICK":
+			driverwait.until(ExpectedConditions.visibilityOf(driver.findElement(this.getObject(p, objectName, objectType))));
 			//Perform click
 			driver.findElement(this.getObject(p,objectName,objectType)).click();
 			break;
 		case "SETTEXT":
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			driverwait.until(ExpectedConditions.visibilityOf(driver.findElement(this.getObject(p, objectName, objectType))));
 			//Set text on control
 			driver.findElement(this.getObject(p,objectName,objectType)).sendKeys(value);
 			break;
 		case "GOTOURL":
 			//Get url of application
 			driver.get(value);//p.getProperty(value));
+			driverwait.until(ExpectedConditions.visibilityOf(driver.findElement(this.getObject(p, objectName, objectType))));
 			break;
 		case "GETTEXT":
+			driverwait.until(ExpectedConditions.visibilityOf(driver.findElement(this.getObject(p, objectName, objectType))));
 			//Get text of an element
 			driver.findElement(this.getObject(p,objectName,objectType)).getText();
 			break;
 		case "ENTER":
-			//Get text of an element
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			driverwait.until(ExpectedConditions.visibilityOf(driver.findElement(this.getObject(p, objectName, objectType))));
+			//Press enter from the keyboard
 			driver.findElement(this.getObject(p, objectName, objectType)).sendKeys(Keys.RETURN);
 			break;
-		case "SWITCHTO":
-			//Get text of an element
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-			driver.findElement(this.getObject(p, objectName, objectType)).sendKeys(Keys.RETURN);
+		case "SWITCHTOWINDOW":
+			
 			break;
+		case "VALIDATE":
+			if(driver.findElement(this.getObject(p, objectName, objectType)).getText() != null) {
+				if(driver.findElement(this.getObject(p, objectName, objectType)).getText().contains(value)) {
+					
+				}
+			}
+			break;	
 		default:
 			break;
 		}

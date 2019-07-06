@@ -7,6 +7,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -37,9 +38,12 @@ public class GoogleIT extends DriverBase {
 		ReadObject object = new ReadObject();
 		Properties allObjects = object.getObjectRepository();
 		UIOperations operations = new UIOperations(webdriver);
-
+		WebDriverWait wait = new WebDriverWait(webdriver, 100);
+		
 		// Call perform function to perform operation on UI
-		operations.perform(allObjects, keyword, objectName, objectType, value);
+		if(keyword!=null) {
+			operations.perform(allObjects, keyword, objectName, objectType, value, wait);
+		}
 
 	}
 
@@ -48,7 +52,7 @@ public class GoogleIT extends DriverBase {
 		Object[][] object = null;
 		ReadDataFromExcelFile file = new ReadDataFromExcelFile();
 
-		// Read keyword sheet
+		// Read the TestCase sheet
 		Sheet testDataSheet = file.readExcel(System.getProperty("user.dir") + "\\", "TestCase.xls",
 				"Google.de_DataSheet");
 		// Find number of rows in excel file

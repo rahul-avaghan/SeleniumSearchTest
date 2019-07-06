@@ -13,6 +13,14 @@ import static com.task.selenium.config.DriverType.valueOf;
 import static org.openqa.selenium.Proxy.ProxyType.MANUAL;
 import static org.openqa.selenium.remote.CapabilityType.PROXY;
 
+/**
+ * The DriverFactory Class provides methods that are required to interact
+ * with WebDriver
+ * @author Sunanda Jakeral
+ * @version 1.0
+ * @since 06/07/2019
+ */
+
 public class DriverFactory {
 
     private RemoteWebDriver driver;
